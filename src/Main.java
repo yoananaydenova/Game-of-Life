@@ -1,4 +1,12 @@
 import java.util.Scanner;
+//  Any live cell with two or three live neighbours survives.
+//  Any dead cell with three live neighbours becomes a live cell.
+//  All other live cells die in the next generation. Similarly, all other dead cells stay dead.
+// live -> 1
+// dead -> 0
+
+// TODO: exception handling for: Integer.parseInt
+// TODO: check variable names
 
 public class Main {
     public static void main(String[] args) {
@@ -16,7 +24,7 @@ public class Main {
         int[][] initialArr = new int[rowSize][columnSize];
         printMatrix(initialArr);
 
-        // set the dead cells
+        // Set the dead cells
         System.out.println("Enter coordinates of the live cells in format \"row-column\". Enter F when you are finish.");
 
         String rowColumnInput = scanner.nextLine();
@@ -31,11 +39,29 @@ public class Main {
             System.out.println("Enter coordinates of the live cells in format \"row-column\". Enter F when you are finish.");
             rowColumnInput = scanner.nextLine();
         }
+
+        System.out.println("Field of game:");
         printMatrix(initialArr);
 
+        // Start to create the next generation
+        System.out.println("Enter N for Next generation and E for Exit from program");
+        String input = scanner.nextLine();
 
+        while (!input.equals("e")) {
 
+            initialArr = createNextGeneration(initialArr);
 
+            System.out.println("Print next generation");
+            printMatrix(initialArr);
+
+            System.out.println("Enter n for Next generation and e for Exit of program");
+            input = scanner.nextLine();
+        }
+
+    }
+
+    private static int[][] createNextGeneration(int[][] initialArr) {
+        return null;
     }
 
     public static void printMatrix(int[][] matrix) {
