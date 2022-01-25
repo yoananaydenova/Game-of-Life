@@ -5,7 +5,7 @@ import java.util.Scanner;
 // live -> 1
 // dead -> 0
 
-// TODO: exception handling for: Integer.parseInt
+// TODO: exception handling for: Integer.parseInt, index out of bound
 // TODO: check variable names
 
 public class Main {
@@ -21,56 +21,48 @@ public class Main {
         int rowSize = Integer.parseInt(rowSizeStr);
         int columnSize = Integer.parseInt(columnSizeStr);
 
-        int[][] initialArr = new int[rowSize][columnSize];
-        printMatrix(initialArr);
 
-        // Set the dead cells
-        System.out.println("Enter coordinates of the live cells in format \"row-column\". Enter F when you are finish.");
+        GameField gameField = new GameField(rowSize, columnSize);
+        System.out.println("Initial field of game:");
+        gameField.printGameField();
+
+        // Set the live cells
+        System.out.println("Enter coordinates of the live cells in format \"row,column\". Enter F when you are finish.");
 
         String rowColumnInput = scanner.nextLine();
-        while (!rowColumnInput.equals("F")){
-            String[] rowAndColumnStr = rowColumnInput.trim().split("-");
+        while (!rowColumnInput.toUpperCase().equals("F")){
+            String[] rowAndColumnStr = rowColumnInput.trim().split(",");
             if(rowAndColumnStr.length == 2){
                 int row = Integer.parseInt(rowAndColumnStr[0]);
                 int column = Integer.parseInt(rowAndColumnStr[1]);
-                initialArr[row][column] = 1;
+
+                gameField.setLiveCell(row, column);
             }
 
-            System.out.println("Enter coordinates of the live cells in format \"row-column\". Enter F when you are finish.");
+            System.out.println("Enter coordinates of the live cells in format \"row,column\". Enter F when you are finish.");
             rowColumnInput = scanner.nextLine();
         }
 
         System.out.println("Field of game:");
-        printMatrix(initialArr);
+        gameField.printGameField();
+
 
         // Start to create the next generation
         System.out.println("Enter N for Next generation and E for Exit from program");
-        String input = scanner.nextLine();
+        String nextGenerationInput = scanner.nextLine();
 
-        while (!input.equals("e")) {
+        while (!nextGenerationInput.toUpperCase().equals("E")) {
 
-            initialArr = createNextGeneration(initialArr);
+
 
             System.out.println("Print next generation");
-            printMatrix(initialArr);
+            gameField.createNextGeneration();
 
-            System.out.println("Enter n for Next generation and e for Exit of program");
-            input = scanner.nextLine();
+
+            System.out.println("Enter N for Next generation and e for Exit of program");
+            nextGenerationInput = scanner.nextLine();
         }
 
     }
 
-    private static int[][] createNextGeneration(int[][] initialArr) {
-        return null;
-    }
-
-    public static void printMatrix(int[][] matrix) {
-        for (int row = 0; row < matrix.length; row++) {
-            for (int col = 0; col < matrix[row].length; col++) {
-                System.out.print(matrix[row][col] + " ");
-            }
-            System.out.println();
-        }
-        System.out.println();
-    }
 }
