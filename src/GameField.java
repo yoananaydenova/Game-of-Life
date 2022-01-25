@@ -31,8 +31,35 @@ public class GameField {
     }
 
     public void  createNextGeneration() {
+        int[][] resultArr = new int[this.row][this.column];
 
+        for (int row = 0; row < this.row; row++) {
+            for (int col = 0; col < this.column; col++) {
+
+                // if cell is LIVE
+                if (this.field[row][col] == 1) {
+                    int liveNeighbours = getLiveNeighbours();
+                    if(liveNeighbours == 2 || liveNeighbours == 3){
+                        resultArr[row][col] = 1;
+                    }
+
+                    // if cell is DEAD
+                } else if (this.field[row][col] == 0) {
+                    int liveNeighbours = getLiveNeighbours();
+
+                    if(liveNeighbours == 3){
+                        resultArr[row][col] = 1;
+                    }
+                }
+            }
+
+        }
+        this.field = resultArr;
         printGameField();
+    }
+
+    private int getLiveNeighbours() {
+        return 0;
     }
 
 
