@@ -1,4 +1,3 @@
-import java.util.Scanner;
 //  Any live cell with two or three live neighbours survives.
 //  Any dead cell with three live neighbours becomes a live cell.
 //  All other live cells die in the next generation. Similarly, all other dead cells stay dead.
@@ -7,6 +6,8 @@ import java.util.Scanner;
 
 // TODO: exception handling for: Integer.parseInt, index out of bound
 // TODO: check variable names
+
+import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
@@ -21,7 +22,6 @@ public class Main {
         int rowSize = Integer.parseInt(rowSizeStr);
         int columnSize = Integer.parseInt(columnSizeStr);
 
-
         GameField gameField = new GameField(rowSize, columnSize);
         System.out.println("Initial field of game:");
         gameField.printGameField();
@@ -30,9 +30,9 @@ public class Main {
         System.out.println("Enter coordinates of the live cells in format \"row,column\". Enter F when you are finish.");
 
         String rowColumnInput = scanner.nextLine();
-        while (!rowColumnInput.toUpperCase().equals("F")){
+        while (!rowColumnInput.toUpperCase().equals("F")) {
             String[] rowAndColumnStr = rowColumnInput.trim().split(",");
-            if(rowAndColumnStr.length == 2){
+            if (rowAndColumnStr.length == 2) {
                 int row = Integer.parseInt(rowAndColumnStr[0]);
                 int column = Integer.parseInt(rowAndColumnStr[1]);
 
@@ -53,11 +53,8 @@ public class Main {
 
         while (!nextGenerationInput.toUpperCase().equals("E")) {
 
-
-
-            System.out.println("Print next generation");
+            System.out.println("Generation No " + gameField.getGeneration() + " :");
             gameField.createNextGeneration();
-
 
             System.out.println("Enter N for Next generation and e for Exit of program");
             nextGenerationInput = scanner.nextLine();
