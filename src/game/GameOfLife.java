@@ -1,12 +1,19 @@
-public class GameField {
+package game;
+
+import game.exceptions.OutOfBoundGameFieldException;
+
+public class GameOfLife {
+    public static final int LOW_BOUND = 2;
+    public static final int HIGH_BOUND = 100;
+
     private int row;
     private int column;
     private int generation = 0;
     private int[][] field;
 
-    public GameField(int row, int column) {
-        this.row = row;
-        this.column = column;
+    public GameOfLife(int row, int column) throws OutOfBoundGameFieldException {
+        setRow(row);
+        setColumn(column);
         this.field = new int[row][column];
     }
 
@@ -18,23 +25,29 @@ public class GameField {
         return column;
     }
 
-    public int getGeneration() {
-        return generation;
+    private void setRow(int row) throws OutOfBoundGameFieldException {
+        if (row < LOW_BOUND || row > HIGH_BOUND) {
+            throw new OutOfBoundGameFieldException(String.format("Row size is out of bound. It must be between %s and %s.n" , LOW_BOUND,HIGH_BOUND));
+        }
+        this.row = row;
     }
 
-    public boolean setLiveCell(int row, int column) {
+    private void setColumn(int column) throws OutOfBoundGameFieldException {
+        if (column < GameOfLife.LOW_BOUND || column > GameOfLife.HIGH_BOUND) {
+            throw new OutOfBoundGameFieldException(String.format("Column size is out of bound. It must be between %s and %s.n" , LOW_BOUND,HIGH_BOUND));
+        }
+        this.column = column;
+    }
+
+    public void setLiveCell(int row, int column) throws OutOfBoundGameFieldException {
         if (row < 0 || row >= this.row) {
-            // TODO throw
-            System.out.println("Out of boundary ROW");
-            return false;
+            throw new OutOfBoundGameFieldException(String.format("Row is out of bound. It must be between 0 and %s inclusive. " , this.row-1));
         }
         if (column < 0 || column >= this.column) {
-            // TODO throw
-            System.out.println("Out of boundary COLUMN");
-            return false;
+            throw new OutOfBoundGameFieldException(String.format("Column is out of bound. It must be between 0 and %s inclusive. " , this.column-1));
         }
         this.field[row][column] = 1;
-        return false;
+
     }
 
     public void createNextGeneration() {
@@ -55,7 +68,7 @@ public class GameField {
         }
         this.generation++;
         this.field = resultArr;
-        printGameField();
+        printField();
     }
 
     private int getLiveNeighbours(int row, int col) {
@@ -96,7 +109,8 @@ public class GameField {
     }
 
 
-    public void printGameField() {
+    public void printField() {
+        System.out.println("Generation No " + this.generation + " :");
         for (int row = 0; row < this.row; row++) {
             for (int col = 0; col < this.column; col++) {
                 System.out.print(this.field[row][col] + " ");
