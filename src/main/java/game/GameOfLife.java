@@ -1,21 +1,31 @@
 package game;
 
 import game.exceptions.OutOfBoundGameFieldException;
-import game.interfaces.GameOfLife;
+import game.interfaces.Game;
 
 
-public class GameOfLifeImpl implements GameOfLife {
+public class GameOfLife implements Game {
+
     public static final int LOW_BOUND = 2;
     public static final int HIGH_BOUND = 100;
 
-    private int row;
-    private int column;
+    public static final int ROW_NUMBER_DEFAULT = 10;
+    public static final int COLUMN_NUMBER_DEFAULT = 10;
+
+    private final int row;
+    private final int column;
     private int generation = 0;
     private int[][] field;
 
-    public GameOfLifeImpl(int row, int column) throws OutOfBoundGameFieldException {
-        setRow(row);
-        setColumn(column);
+    public GameOfLife(int row, int column) throws OutOfBoundGameFieldException {
+        if (row < LOW_BOUND || row > HIGH_BOUND) {
+            throw new OutOfBoundGameFieldException(String.format("Row size is out of bound. It must be between %s and %s.n", LOW_BOUND, HIGH_BOUND));
+        }
+        if (column < LOW_BOUND || column > HIGH_BOUND) {
+            throw new OutOfBoundGameFieldException(String.format("Column size is out of bound. It must be between %s and %s.n", LOW_BOUND, HIGH_BOUND));
+        }
+        this.row = row;
+        this.column = column;
         this.field = new int[row][column];
     }
 
@@ -27,21 +37,7 @@ public class GameOfLifeImpl implements GameOfLife {
         return column;
     }
 
-    private void setRow(int row) throws OutOfBoundGameFieldException {
-        if (row < LOW_BOUND || row > HIGH_BOUND) {
-            throw new OutOfBoundGameFieldException(String.format("Row size is out of bound. It must be between %s and %s.n", LOW_BOUND, HIGH_BOUND));
-        }
-        this.row = row;
-    }
-
-    private void setColumn(int column) throws OutOfBoundGameFieldException {
-        if (column < GameOfLifeImpl.LOW_BOUND || column > GameOfLifeImpl.HIGH_BOUND) {
-            throw new OutOfBoundGameFieldException(String.format("Column size is out of bound. It must be between %s and %s.n", LOW_BOUND, HIGH_BOUND));
-        }
-        this.column = column;
-    }
-
-    public void setLiveCell(int row, int column) throws OutOfBoundGameFieldException {
+    public void setup(int row, int column) throws OutOfBoundGameFieldException {
         if (row < 0 || row >= this.row) {
             throw new OutOfBoundGameFieldException(String.format("Row is out of bound. It must be between 0 and %s inclusive. ", this.row - 1));
         }
@@ -51,7 +47,7 @@ public class GameOfLifeImpl implements GameOfLife {
         this.field[row][column] = 1;
     }
 
-    public void createNextGeneration() {
+    public void play() {
         int[][] resultArr = new int[this.row][this.column];
 
         for (int row = 0; row < this.row; row++) {
@@ -108,8 +104,8 @@ public class GameOfLifeImpl implements GameOfLife {
         return result;
     }
 
-    @Override
-    public String toString() {
+
+    public void drawGameField() {
         StringBuilder stringBuilder = new StringBuilder("Generation No " + this.generation + " :\n");
         for (int row = 0; row < this.row; row++) {
             for (int col = 0; col < this.column; col++) {
@@ -119,6 +115,6 @@ public class GameOfLifeImpl implements GameOfLife {
            stringBuilder.append(" \n");
         }
         stringBuilder.append(" \n");
-        return stringBuilder.toString();
+        System.out.println(stringBuilder.toString());
     }
 }

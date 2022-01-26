@@ -2,7 +2,7 @@ package game;
 
 import org.junit.Test;
 
-class GameOfLifeImplTest {
+class GameOfLifeTest {
 
     @Test
     public void setLiveCell_shouldSetCorrectCeilInBounder() {
