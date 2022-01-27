@@ -8,7 +8,6 @@ public class GameOfLife implements Game {
 
     public static final int LOW_BOUND = 2;
     public static final int HIGH_BOUND = 100;
-
     public static final int ROW_NUMBER_DEFAULT = 10;
     public static final int COLUMN_NUMBER_DEFAULT = 10;
 
@@ -35,6 +34,14 @@ public class GameOfLife implements Game {
 
     public int getColumn() {
         return column;
+    }
+
+    public int getGeneration() {
+        return generation;
+    }
+
+    public int[][] getField() {
+        return field;
     }
 
     public void setup(int row, int column) throws OutOfBoundGameFieldException {
@@ -105,8 +112,8 @@ public class GameOfLife implements Game {
     }
 
 
-    public void drawGameField() {
-        StringBuilder stringBuilder = new StringBuilder("Generation No " + this.generation + " :\n");
+    public String drawGameField() {
+        StringBuilder stringBuilder = new StringBuilder();
         for (int row = 0; row < this.row; row++) {
             for (int col = 0; col < this.column; col++) {
 
@@ -114,7 +121,6 @@ public class GameOfLife implements Game {
             }
            stringBuilder.append(" \n");
         }
-        stringBuilder.append(" \n");
-        System.out.println(stringBuilder.toString());
+        return stringBuilder.toString();
     }
 }

@@ -61,7 +61,8 @@ public class UserConsole implements User {
 
         System.out.println();
         System.out.println("INITIAL FIELD OF GAME");
-        game.drawGameField();
+        System.out.println("Generation No " + game.getGeneration() + " :\n");
+        System.out.println(game.drawGameField());
     }
 
 
@@ -73,7 +74,8 @@ public class UserConsole implements User {
 
             if (nextGenerationInput.toUpperCase().equals("N")) {
                 game.play();
-                game.drawGameField();
+                System.out.println("Generation No " + game.getGeneration() + " :\n");
+                System.out.println(game.drawGameField());
             }else {
                 System.out.print("Incorrect format of input. Try again! ");
             }
@@ -82,4 +84,8 @@ public class UserConsole implements User {
             nextGenerationInput = scanner.nextLine();
         }
     }
+
+
 }
+
+
