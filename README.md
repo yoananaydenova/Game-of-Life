@@ -1,6 +1,6 @@
 # Game-of-Life
 
-This is an implementation of Conway's Game of Life.
+This is a Java implementation of Conway's game of life. Tests have been created for the GameOfLife class.
 
 Rules of the game:
 1. Any live cell with two or three live neighbours survives.
@@ -8,6 +8,7 @@ Rules of the game:
 3. All other live cells die in the next generation. Similarly, all other dead cells stay dead.
 
 
+Instructions:
 - You can run the game as a standard java program.
 - The game interface is console.
 - The playing field consists of rows and columns that are limited from 2 to 100 and filled with cells. 
