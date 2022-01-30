@@ -7,4 +7,7 @@ public interface Game {
     void play();
     String drawGameField();
     int getGeneration();
+
+    int getRow();
+    int getColumn();
 }
