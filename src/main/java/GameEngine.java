@@ -1,7 +1,10 @@
 import game.GameOfLife;
+import game.IntPair;
 import game.exceptions.OutOfBoundGameFieldException;
 import game.interfaces.Game;
 import ui.UserConsole;
+
+import java.util.List;
 
 public class GameEngine {
 
@@ -26,8 +29,17 @@ public class GameEngine {
         // Set the live cells
         UserConsole userConsole = new UserConsole(game);
 
-        userConsole.setInitialGameState();
-        // Start to create the next generation
+        List<IntPair> initialGameStateCoordinates = userConsole.getInitialGameState();
+        for (IntPair pair : initialGameStateCoordinates) {
+            game.setup(pair.getRow() - 1, pair.getColumn() - 1);
+        }
+        System.out.println();
+        System.out.println("INITIAL FIELD OF GAME");
+        System.out.println("Generation No " + game.getGeneration() + " :\n");
+        System.out.println(game.drawGameField());
+
+
+       // Start to create the next generation
         userConsole.startGame();
 
     }
