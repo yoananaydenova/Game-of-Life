@@ -4,10 +4,6 @@
 // live -> 1
 // dead -> 0
 
-// TODO: check variable names
-// TODO: create tests
-
-
 public class Main {
     public static void main(String[] args) {
         try {

@@ -11,8 +11,6 @@ import java.util.Scanner;
 
 public class UserConsole implements User {
 
-
-
     private static final Scanner scanner = new Scanner(System.in);
    private final Game game;
 
@@ -49,8 +47,8 @@ public class UserConsole implements User {
                 try {
                     int row = Integer.parseInt(rowAndColumnStr[0]);
                     int column = Integer.parseInt(rowAndColumnStr[1]);
+
                     listOfCoordinates.add(new IntPair(row, column));
-                   // game.setup(row-1, column-1);
                 }catch (NumberFormatException e){
                     System.out.print("Incorrect format of input. Try again! ");
                 } catch (OutOfBoundGameFieldException e) {
@@ -66,10 +64,6 @@ public class UserConsole implements User {
         }
 
         return listOfCoordinates;
-//        System.out.println();
-//        System.out.println("INITIAL FIELD OF GAME");
-//        System.out.println("Generation No " + game.getGeneration() + " :\n");
-//        System.out.println(game.drawGameField());
     }
 
 

@@ -22,8 +22,8 @@ public class GameEngine {
         } catch (OutOfBoundGameFieldException e) {
             // Create game with default dimensions
             game = new GameOfLife(GameOfLife.ROW_NUMBER_DEFAULT, GameOfLife.COLUMN_NUMBER_DEFAULT);
-            System.out.printf("There was a problem creating a game field. It's created by default with dimensions: %d rows and %d columns.", game.getRow(), game.getColumn());
             System.out.println(e.getMessage());
+            System.out.printf("There was a problem creating a game field. It's created by default with dimensions: %d rows and %d columns.", GameOfLife.ROW_NUMBER_DEFAULT, GameOfLife.COLUMN_NUMBER_DEFAULT);
         }
 
         // Set the live cells
@@ -37,7 +37,6 @@ public class GameEngine {
         System.out.println("INITIAL FIELD OF GAME");
         System.out.println("Generation No " + game.getGeneration() + " :\n");
         System.out.println(game.drawGameField());
-
 
        // Start to create the next generation
         userConsole.startGame();
