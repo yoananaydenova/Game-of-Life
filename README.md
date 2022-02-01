@@ -1,6 +1,8 @@
 # Game-of-Life
 
-This is a Java implementation of Conway's game of life. Tests have been created for the GameOfLife class.
+This is a Java implementation of Conway's game of life. For easy build and dependency management tool is used Maven. 
+In the case of an error a meaningful message is provided to player.
+Tests have been created for the GameOfLife class.
 
 Rules of the game:
 1. Any live cell with two or three live neighbours survives.
